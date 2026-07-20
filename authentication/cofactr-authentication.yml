@@ -1,0 +1,44 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+docs: https://support.cofactr.com/collections/5590442793-developer_resources
+keys_url: https://platform.cofactr.com/integrations/api-keys
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  apis:
+    Cofactr Knowledge Graph: X-CLIENT-ID + X-API-KEY headers (one credential set, server-side only)
+    Cofactr Platform API: "Authorization: Api-Key <key> (case-sensitive)"
+  sso: SAML SSO available for the platform (support KB "Configuring SAML SSO")
+schemes:
+- name: PlatformApiKey
+  api: Cofactr Platform API
+  type: apiKey
+  in: header
+  parameter: Authorization
+  format: "Api-Key <key>"
+  case_sensitive: true
+  keys_url: https://platform.cofactr.com/integrations/api-keys
+  description: >-
+    Platform API (flagship-api.cofactr.com) authenticates with a case-sensitive
+    "Authorization: Api-Key <key>" header. Keys are generated in the platform.
+  sources:
+  - https://support.cofactr.com/articles/4081898446-cofactr-platform-api-documentation
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  description: Issued with your client ID as one Cofactr credential set. Never expose your API
+    key in front-end code or public Git repositories. The Cofactr API is for server-side use
+    only. Public disclosure of a key results in immediate revocation without prior warning.
+  sources:
+  - openapi/cofactr-knowledge-graph-openapi-original.json
+- name: ClientId
+  type: apiKey
+  in: header
+  parameter: X-CLIENT-ID
+  description: Issued with your API key as one Cofactr credential set.
+  sources:
+  - openapi/cofactr-knowledge-graph-openapi-original.json
