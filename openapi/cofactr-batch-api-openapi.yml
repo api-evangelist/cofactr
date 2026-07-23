@@ -1,0 +1,356 @@
+openapi: 3.1.0
+info:
+  title: Cofactr Knowledge Graph batch API
+  version: '2026-07-10'
+  x-logo:
+    url: /static/cofactr_logo.png
+  description: Execute multiple product queries in a single request. Each batch member is an operation against the products API expressed as a relative URL; members are fulfilled concurrently and returned in order.
+servers:
+- url: https://graph.cofactr.com
+  description: Production
+security:
+- ApiKey: []
+  ClientId: []
+tags:
+- name: batch
+  description: Execute multiple product queries in a single request. Each batch member is an operation against the products API expressed as a relative URL; members are fulfilled concurrently and returned in order.
+paths:
+  /batch/products/:
+    post:
+      tags:
+      - batch
+      summary: Execute a batch of product queries
+      description: Execute a batch of product queries.
+      operationId: batchProducts
+      parameters:
+      - $ref: '#/components/parameters/Timeout'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductsBatch'
+      responses:
+        '200':
+          description: One response per batch member, in request order. Each member carries the status code and body it would have received as a standalone request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductBatchResponse'
+              example:
+              - code: 200
+                body:
+                  data:
+                  - id: CC2DKKO1LUCF
+                    classification: ceramic capacitors
+                    description: 0805 0.1 uF 100V ±10% Tolerance X7R SMT Multilayer Ceramic Capacitor
+                    documents:
+                    - label: Datasheet
+                      url: https://www.mouser.com/datasheet/2/281/1/GCM21BR72A104KA37_01A-3145807.pdf
+                      filename: Untitled
+                    - label: Reach Statement
+                      url: http://sigma.octopart.com/reach_statement/Murata-company-16.pdf
+                      filename: Murata-company-16.pdf
+                    hero_image: https://assets.cofactr.com/image/772e5cab-cbf3-337d-99ff-c8ac79448a0c.jpg
+                    mfr: Murata
+                    mpn: GCM21BR72A104KA37L
+                    alt_mpns:
+                    - GCM21BR72A104KA37L.
+                    - GCM21BR72A104KA37L
+                    msl: '1'
+                    package: 0805
+                    specs:
+                    - id: capacitance
+                      label: Capacitance
+                      display_value: 100 nF
+                      quantity:
+                        unit: F
+                        amount: 1e-07
+                    - id: voltagerating_dc_
+                      label: Voltage rating (DC)
+                      display_value: 100 V
+                      quantity:
+                        unit: V
+                        amount: 100
+                    - id: temperaturecoefficient
+                      label: Temperature coefficient
+                      display_value: X7R
+                    product_updated_at: '2026-07-09T22:21:55.650630+00:00'
+                    termination_type: SMT
+                    deprecated_ids:
+                    - XXLL0JPD4W2X
+                    - CC96NA4H7MOT
+                    - CCI0BFAAL00D
+                    min_lead: 3
+                    offers:
+                    - part: CC2DKKO1LUCF
+                      seller:
+                        id: 622fb450e4c292d8287b0af5
+                        deprecated_ids:
+                        - 62d4bcc6412443e55717f293
+                        - 62d4bcc6412443e55717f291
+                        - 62d4bcc6412443e55717f28f
+                        label: Digi-Key
+                        aliases:
+                        - Digi-Key Kit
+                        - Digi-Key Corporation
+                        - DIGI-KEY EVALUATION BOARDS
+                        - Digikey
+                        - Digi-Key Electronics
+                        certifications:
+                        - AS9120
+                        - CFR21
+                        lead: 3
+                        free_ship:
+                          threshold: 250
+                          shipping_lead: 2
+                        shipping_options:
+                        - price: 29.99
+                          shipping_lead: 1
+                        - price: 13.99
+                          shipping_lead: 2
+                        - price: 0
+                          shipping_lead: 5
+                        convenience_return_window: 30
+                        scheduled_release_period: 12
+                        us_shipping_methods:
+                          UPS 1 day: 1
+                          UPS 2 day: 2
+                          UPS 3 day: 3
+                          UPS ground: 5
+                        international_shipping_methods:
+                          DHL worldwide Express: 3
+                          UPS worldwide saver: 4
+                        custom_reel_price: 0.0
+                      is_authorized: true
+                      shipping_lead: 4
+                      ships_from_country: US
+                      sku: 490-4789-2-ND
+                      inventory_level: 652178
+                      packaging: Tape & Reel
+                      moq: 3000
+                      prices:
+                      - quantity: 3000
+                        price: 0.03828
+                        currency: USD
+                        converted_currency: USD
+                        converted_price: 0.03828
+                        conversion_rate: 1.0
+                      - quantity: 6000
+                        price: 0.0354
+                        currency: USD
+                        converted_currency: USD
+                        converted_price: 0.0354
+                        conversion_rate: 1.0
+                      - quantity: 9000
+                        price: 0.03395
+                        currency: USD
+                        converted_currency: USD
+                        converted_price: 0.03395
+                        conversion_rate: 1.0
+                      factory_lead_days: 147
+                      order_multiple: 1
+                      offer_updated_at: '2026-07-11T00:54:11.127659+00:00'
+              - code: 200
+                body:
+                  data:
+                  - id: CC2DKKO1LUCF
+                    classification: ceramic capacitors
+                    description: 0805 0.1 uF 100V ±10% Tolerance X7R SMT Multilayer Ceramic Capacitor
+                    hero_image: https://assets.cofactr.com/image/772e5cab-cbf3-337d-99ff-c8ac79448a0c.jpg
+                    mfr: Murata
+                    mpn: GCM21BR72A104KA37L
+                    alt_mpns:
+                    - GCM21BR72A104KA37L.
+                    - GCM21BR72A104KA37L
+                    msl: '1'
+                    package: 0805
+                    termination_type: SMT
+                    lifecycle_status: Production
+                    inventory_level: 31089253
+                    buyable: 31
+                    quotable: 35
+                    maybe: 0
+                    updated_at: '2026-07-09T22:21:55.650630+00:00'
+                    deprecated_ids:
+                    - XXLL0JPD4W2X
+                    - CC96NA4H7MOT
+                    - CCI0BFAAL00D
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Rate limit exceeded. This may be the monthly product quota or the concurrent-request ceiling.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            Retry-After:
+              description: Seconds until the request may be retried. Always present on 429/504.
+              schema:
+                type: string
+            X-RateLimit-Limit:
+              description: Present only when the monthly product quota was exceeded.
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              description: Present only when the monthly product quota was exceeded.
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              description: Present only when the monthly product quota was exceeded.
+              schema:
+                type: string
+            X-RateLimit-ResetTime:
+              description: Present only when the monthly product quota was exceeded.
+              schema:
+                type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '504':
+          description: Request exceeded the maximum processing time (concurrency-limited clients).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          headers:
+            Retry-After:
+              description: Seconds until the request may be retried. Always present on 429/504.
+              schema:
+                type: string
+components:
+  schemas:
+    ProductBatchResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchMemberResult'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ProductsBatch:
+      properties:
+        batch:
+          items:
+            $ref: '#/components/schemas/APIOperation'
+          type: array
+          maxItems: 250
+          title: Batch
+      type: object
+      required:
+      - batch
+      title: ProductsBatch
+      description: Batch of product requests.
+      examples:
+      - batch:
+        - method: GET
+          relative_url: ?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr
+        - method: GET
+          relative_url: ?filtering=[{"field":"id","operator":"IN","value":["CC2DKKO1LUCF"]}]&schema=product-v1
+    BatchMemberResult:
+      type: object
+      required:
+      - code
+      - body
+      properties:
+        code:
+          type: integer
+          description: HTTP status code the member request would have received as a standalone request.
+        body:
+          description: 'The JSON body the member request would have received as a standalone request: a product list envelope (`ProductListResponse`) on success, or a validation/error body on failure.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Error:
+      type: object
+      required:
+      - detail
+      properties:
+        detail:
+          type: string
+          description: Human-readable explanation of the error.
+    APIOperation:
+      properties:
+        method:
+          type: string
+          const: GET
+          title: Method
+        relative_url:
+          type: string
+          title: Relative Url
+      type: object
+      required:
+      - method
+      - relative_url
+      title: APIOperation
+      description: API Operation for GET requests.
+  parameters:
+    Timeout:
+      name: timeout
+      in: query
+      required: false
+      schema:
+        anyOf:
+        - type: integer
+        - type: 'null'
+        title: Timeout
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Issued with your client ID as one Cofactr credential set. Never expose your API key in front-end code or public Git repositories. The Cofactr API is for server-side use only. Public disclosure of a key results in immediate revocation without prior warning.
+      x-display-name: API key
+      x-auth-set: CofactrCredentials
+      x-auth-set-display-name: Cofactr API credentials
+    ClientId:
+      type: apiKey
+      in: header
+      name: X-CLIENT-ID
+      description: Issued with your API key as one Cofactr credential set.
+      x-display-name: Client ID
+      x-auth-set: CofactrCredentials
+      x-auth-set-display-name: Cofactr API credentials
