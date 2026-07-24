@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: searched
+source: https://support.cofactr.com/articles/1960145070-cofactr-platform-webhooks
+spec_type: Webhooks
+transport: http-post
+delivery:
+  note: Outbound event queue can take up to 2 minutes to process platform changes.
+registration:
+  via: Cofactr platform Integrations App
+  steps:
+  - Install the "Send Webhooks" integration.
+  - Enter the POST URL that webhooks should be sent to.
+  - Select one or more Triggers (record types + event types).
+  multiple_installs: Supported, for fan-out to multiple URLs or per-trigger routing.
+signing:
+  documented: false
+  note: No signature/verification mechanism is documented.
+event_types:
+- created
+- updated
+record_types:
+- BOM
+payload:
+  media_type: application/json
+  fields:
+    event_type: created | updated
+    record_type: The record type that changed (e.g. BOM).
+    id: UUID of the record.
+    data: Record data matching the corresponding Platform API GET response.
+docs: https://developers.cofactr.com/

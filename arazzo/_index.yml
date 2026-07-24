@@ -1,0 +1,8 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+workflows:
+- file: cofactr-search-and-view-product.yml
+  workflowId: searchAndViewProduct
+  title: Cofactr — search and view a component
+  summary: Search the Cofactr Knowledge Graph for a part, then view its full detail.

@@ -1,0 +1,57 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+notes: >-
+  Entity-relationship graph derived from the Knowledge Graph OpenAPI component
+  schemas. The domain centers on Product (an electronic component / part) and
+  its distributor offers, pricing, sellers, documents, and specs.
+entities:
+- name: Product
+  schemas: [ProductV0, ProductV1]
+  id_field: id
+  id_domain: cofactr_part_id
+  description: An electronic component / part in the Cofactr Knowledge Graph.
+- name: ProductOffers
+  schemas: [ProductOffersV0, ProductOffersV1, OffersV0]
+  description: Distributor offers (availability, pricing, lead time) attached to a product.
+- name: PricePoint
+  schemas: [PricePoint, ProductOffersV1Quantity]
+  description: A quantity-break price point within an offer.
+- name: Seller
+  schemas: [Seller, ProductOffersV1Seller]
+  description: A distributor / seller offering the product.
+- name: ProductDocument
+  schemas: [ProductDocument]
+  description: A datasheet or document associated with a product.
+- name: ProductSpec
+  schemas: [ProductSpec, ProductOffersV1Spec]
+  description: A parametric specification attribute of a product.
+- name: Autocompletion
+  schemas: [Autocompletion]
+  description: A product search autocompletion suggestion.
+relationships:
+- from: Product
+  to: ProductOffers
+  type: has_many
+  via: offers
+- from: ProductOffers
+  to: Seller
+  type: belongs_to
+  via: seller
+- from: ProductOffers
+  to: PricePoint
+  type: has_many
+  via: prices
+- from: Product
+  to: ProductDocument
+  type: has_many
+  via: documents
+- from: Product
+  to: ProductSpec
+  type: has_many
+  via: specs
+operations:
+- listProducts: GET /products/
+- getProduct: GET /products/{id}
+- autocompleteProducts: GET /products/autocompletions/
+- batchProducts: POST /batch/products/

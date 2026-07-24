@@ -1,0 +1,47 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+docs: https://graph.cofactr.com/openapi.json
+format: detail-envelope
+envelope:
+  field: detail
+  schema: Error
+  media_type: application/json
+  description: >-
+    Cofactr Knowledge Graph errors return a JSON object with a single required
+    "detail" string (a human-readable explanation). This is NOT RFC 9457
+    problem+json; the media type is application/json.
+problems:
+- status: 401
+  title: Unauthorized
+  description: Missing or invalid X-API-KEY / X-CLIENT-ID credentials.
+  remediation: Provide both the X-CLIENT-ID and X-API-KEY headers with a valid Cofactr credential set.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#listProducts
+- status: 403
+  title: Forbidden
+  description: Authenticated but not permitted to access the requested resource or data mode.
+  remediation: Confirm your plan grants access to the requested product data, schema, or private data mode.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#listProducts
+- status: 422
+  title: Validation Error
+  description: Request parameters failed validation (FastAPI HTTPValidationError shape with loc/msg/type).
+  remediation: Correct the offending query parameters listed in the validation error body.
+  schema: HTTPValidationError
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#listProducts
+- status: 429
+  title: Rate limit exceeded
+  description: >-
+    Either the monthly product quota or the concurrent-request ceiling was
+    exceeded. Metered per Part per your plan.
+  remediation: Reduce concurrency or request volume; consider caching and avoiding force_refresh=true.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#listProducts
+- status: 500
+  title: Server error
+  description: Unexpected server-side error.
+  remediation: Retry with backoff; contact success@cofactr.com if it persists.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#listProducts
+- status: 504
+  title: Gateway timeout
+  description: Request exceeded the maximum processing time (concurrency-limited clients).
+  remediation: Narrow the query, lower the requested fields/schema, or reduce concurrency.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#listProducts

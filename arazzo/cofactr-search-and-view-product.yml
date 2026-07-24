@@ -1,0 +1,50 @@
+arazzo: 1.0.1
+info:
+  title: Cofactr — search and view a component
+  version: 1.0.0
+  summary: Search the Cofactr Knowledge Graph for a part, then view its full detail.
+sourceDescriptions:
+- name: knowledgeGraph
+  url: ../openapi/cofactr-knowledge-graph-openapi-original.json
+  type: openapi
+workflows:
+- workflowId: searchAndViewProduct
+  summary: Search products by MPN, then retrieve the top result's full detail.
+  inputs:
+    type: object
+    properties:
+      query:
+        type: string
+      search_strategy:
+        type: string
+        default: mpn_exact
+    required: [query]
+  steps:
+  - stepId: searchProducts
+    operationId: listProducts
+    parameters:
+    - name: q
+      in: query
+      value: $inputs.query
+    - name: search_strategy
+      in: query
+      value: $inputs.search_strategy
+    - name: limit
+      in: query
+      value: 5
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstProductId: $response.body#/data/0/id
+  - stepId: viewProduct
+    operationId: getProduct
+    parameters:
+    - name: id
+      in: path
+      value: $steps.searchProducts.outputs.firstProductId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      product: $response.body
+  outputs:
+    product: $steps.viewProduct.outputs.product

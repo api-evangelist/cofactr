@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cofactr Knowledge Graph
+  version: 1.0.0
+extends: openapi/cofactr-knowledge-graph-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: cofactr
+    x-apievangelist-category: [component-intelligence, electronics-supply-chain, procurement]
+    x-apievangelist-auth: apiKey (X-CLIENT-ID + X-API-KEY)
+    x-apievangelist-pagination: cursor (limit + page_token)
+    x-apievangelist-error-envelope: "{detail} (application/json, not RFC 9457)"
+- target: $.info
+  update:
+    x-apievangelist-sibling-api:
+      name: Cofactr Platform API
+      base_url: https://flagship-api.cofactr.com/
+      docs: https://developers.cofactr.com/
+      webhooks: https://support.cofactr.com/articles/1960145070-cofactr-platform-webhooks

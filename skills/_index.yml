@@ -1,0 +1,12 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+skills:
+- file: cofactr-find-component.md
+  name: Find an electronic component with Cofactr
+  api: openapi/cofactr-knowledge-graph-openapi-original.json
+  operations: [listProducts, getProduct, autocompleteProducts]
+- file: cofactr-batch-part-lookup.md
+  name: Batch-resolve a BOM against Cofactr
+  api: openapi/cofactr-knowledge-graph-openapi-original.json
+  operations: [batchProducts]

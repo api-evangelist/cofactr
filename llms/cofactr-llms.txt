@@ -1,0 +1,34 @@
+# Cofactr
+
+> Cofactr provides electronics supply chain infrastructure — component intelligence, procurement execution, and ITAR-registered warehousing and kitting — so hardware teams avoid shortages and production delays. It exposes two REST APIs: the Knowledge Graph (Component Cloud) API for component data, and the Platform API for BOMs, POs, kits, and inventory.
+
+## APIs
+
+- [Cofactr Knowledge Graph (Component Cloud) API](https://graph.cofactr.com): Component intelligence — search parts, view products, offers, pricing, and specs. OpenAPI 3.1 at https://graph.cofactr.com/openapi.json. Auth: X-CLIENT-ID + X-API-KEY headers.
+- [Cofactr Platform API](https://flagship-api.cofactr.com/): BOMs, purchase orders, kits, invoices, and inventory. Auth: `Authorization: Api-Key <key>`. Docs: https://developers.cofactr.com/
+
+## Specs
+
+- [Knowledge Graph OpenAPI](https://raw.githubusercontent.com/api-evangelist/cofactr/refs/heads/main/openapi/cofactr-knowledge-graph-openapi-original.json)
+
+## Docs
+
+- [Developer Center](https://developers.cofactr.com/)
+- [Knowledge Graph API docs](https://support.cofactr.com/articles/7816454452-cofactr-component-cloud-api-documentation)
+- [Platform API docs](https://support.cofactr.com/articles/4081898446-cofactr-platform-api-documentation)
+- [Platform Webhooks](https://support.cofactr.com/articles/1960145070-cofactr-platform-webhooks)
+- [Fixed egress IPs](https://support.cofactr.com/articles/1352420327-cofactr-fixed-ips)
+- [SAML SSO](https://support.cofactr.com/articles/5814357511-configuring-saml-sso)
+- [API keys](https://platform.cofactr.com/integrations/api-keys)
+
+## SDKs
+
+- [cofactr (Python)](https://pypi.org/project/cofactr/) — official client library, https://github.com/Cofactr/cofactr-client
+
+## Company
+
+- [Website](https://www.cofactr.com/)
+- [Knowledge Base](https://support.cofactr.com/)
+- [Terms of Service](https://www.cofactr.com/terms-of-service)
+- [Privacy Policy](https://www.cofactr.com/privacy-policy)
+- [Bug Bounty](https://www.cofactr.com/cofactrs-bug-bounty)

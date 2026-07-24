@@ -1,0 +1,15 @@
+generated: '2026-07-18'
+method: searched
+source: https://support.cofactr.com/articles/4081898446-cofactr-platform-api-documentation
+model: sandbox-sub-orgs
+description: >-
+  Cofactr does not publish magic test card/identifier values. Instead it offers
+  Sandbox Sub-Orgs: isolated organizations for testing against the Platform API
+  without affecting production data.
+access:
+  how: Contact success@cofactr.com to have a sandbox sub-org provisioned.
+  scoping_param: org_id
+  note: Requests are scoped to a specific organization (including a sandbox sub-org) via the org_id query parameter.
+test_values:
+  published: false
+  note: No published static test tokens/cards; testing is done inside a provisioned sandbox sub-org.

@@ -1,0 +1,74 @@
+generated: '2026-07-18'
+method: searched
+source: https://support.cofactr.com/collections/5590442793-developer_resources
+notes: >-
+  Cross-cutting request/response semantics for Cofactr's two REST APIs: the
+  Knowledge Graph / Component Cloud API (graph.cofactr.com, OpenAPI-described)
+  and the Platform API (flagship-api.cofactr.com, documented in the support
+  knowledge base). Derived from the Knowledge Graph OpenAPI and searched from
+  the Cofactr Developer Resources articles.
+authentication:
+  style: api-key-header
+  knowledge_graph:
+    headers: [X-CLIENT-ID, X-API-KEY]
+    note: Both headers form one Cofactr credential set; server-side use only.
+  platform_api:
+    header: Authorization
+    format: "Api-Key {api_key}"
+    case_sensitive: true
+    keys_url: https://platform.cofactr.com/integrations/api-keys
+  cross_link: authentication/cofactr-authentication.yml
+url_conventions:
+  trailing_slash:
+    required: true
+    scope: platform_api
+    note: All Platform API requests must include a trailing slash or they fail.
+  org_scoping:
+    param: org_id
+    scope: platform_api
+    note: Scope a request to a specific organization via the org_id query parameter.
+pagination:
+  style: cursor
+  scope: knowledge_graph
+  params:
+    limit: Maximum number of records to return.
+    page_token: Base64-encoded page token used to fetch the next page.
+sparse_fields:
+  param: fields
+  note: Comma-separated list of fields to return (field selection).
+response_schema_selection:
+  param: schema
+  note: >-
+    Select the response schema/version for returned products (public values
+    include product-v0 / product-v1 families); schemas are versioned.
+search:
+  query_param: q
+  strategy_param: search_strategy
+  strategies: [default, mpn_sku_mfr, mpn_exact, mpn_exact_mfr]
+freshness:
+  external_param: external
+  force_refresh_param: force_refresh
+  stale_delta_param: stale_delta
+  note: >-
+    external toggles fetching external distributor data; force_refresh=true
+    forces re-ingestion and may consume distributor rate limits prematurely;
+    stale_delta sets how long offer data is considered fresh.
+idempotency:
+  supported: false
+  note: No idempotency-key mechanism is documented; writes are limited (batch POST is a read-style query).
+rate_limit_signaling:
+  status_code: 429
+  model: Metered per Part; monthly product quota plus a concurrent-request ceiling.
+  cross_link: rate-limits/cofactr-rate-limits.yml
+error_envelope:
+  field: detail
+  media_type: application/json
+  format: detail-string (not RFC 9457)
+  cross_link: errors/cofactr-problem-types.yml
+versioning:
+  knowledge_graph: Calendar-dated spec version (e.g. 2026-07-10) plus versioned response schemas (v0/v1).
+  platform_api: URI path versioning (e.g. /v1/boms/).
+  cross_link: lifecycle/cofactr-lifecycle.yml
+webhooks:
+  supported: true
+  cross_link: asyncapi/cofactr-platform-webhooks.yml

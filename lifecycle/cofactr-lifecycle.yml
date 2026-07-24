@@ -1,0 +1,26 @@
+generated: '2026-07-18'
+method: searched
+source: https://support.cofactr.com/collections/5590442793-developer_resources
+versioning:
+  knowledge_graph:
+    scheme: calendar-dated-spec + versioned-response-schemas
+    current: '2026-07-10'
+    schema_families: [product-v0, product-v1]
+    docs: https://graph.cofactr.com/openapi.json
+  platform_api:
+    scheme: uri-path
+    current: v1
+    docs: https://developers.cofactr.com/
+deprecation:
+  policy_url: null
+  sunset_header: null
+  note: No published deprecation/Sunset (RFC 8594) policy was found.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+notes: >-
+  No public status page or formal SLA/deprecation policy was located as of the
+  probe date. Fixed egress IPs are published for allowlisting
+  (https://support.cofactr.com/articles/1352420327-cofactr-fixed-ips).
+deprecated_operations: []

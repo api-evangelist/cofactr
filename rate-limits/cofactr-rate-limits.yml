@@ -1,0 +1,26 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+docs: https://support.cofactr.com/articles/7816454452-cofactr-component-cloud-api-documentation
+model: metered-per-part
+signal:
+  status_code: 429
+  description: >-
+    A 429 indicates either the monthly product quota or the concurrent-request
+    ceiling was exceeded (concurrency-limited clients may also see 504 on long
+    requests).
+rate_limits:
+- api: Cofactr Knowledge Graph
+  scope: monthly product quota
+  limit_count: null
+  note: Usage is metered per Part; the exact quota depends on the selected plan.
+- api: Cofactr Knowledge Graph
+  scope: concurrent requests
+  limit_count: null
+  note: A concurrency ceiling applies; exceeding it returns 429, and long requests may 504.
+- api: Cofactr Knowledge Graph
+  scope: distributor rate limits
+  limit_count: null
+  note: >-
+    force_refresh=true and custom pricing features can consume upstream
+    distributor rate limits prematurely.

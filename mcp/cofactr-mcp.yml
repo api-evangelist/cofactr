@@ -1,0 +1,26 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+note: >-
+  No official hosted/remote Cofactr MCP server was found. This is a candidate
+  tool list derived one-to-one from the Knowledge Graph OpenAPI operations, for
+  exposing Cofactr component intelligence to agents. Auth would bind the
+  X-CLIENT-ID + X-API-KEY credential set.
+server:
+  name: cofactr-knowledge-graph
+  transport: http
+  url: null
+tools:
+- name: list_products
+  description: Search/list electronic components (products) with filtering, search strategies, and field selection.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#listProducts
+- name: get_product
+  description: View a single product by its Cofactr part id.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#getProduct
+- name: autocomplete_products
+  description: Return product search autocompletion suggestions for a query.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#autocompleteProducts
+- name: batch_products
+  description: Execute a batch of product queries in a single request.
+  source_operation: openapi/cofactr-knowledge-graph-openapi-original.json#batchProducts

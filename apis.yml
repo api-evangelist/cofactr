@@ -1,8 +1,26 @@
 aid: cofactr
 name: Cofactr
-description: 'Cofactr is a company surfaced as a portfolio company of bain-capital-ventures and added
-  to the API Evangelist network as a stub for enrichment. Sector: physical-ai. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  Cofactr provides electronics supply chain infrastructure for hardware manufacturers —
+  component intelligence, procurement execution, and ITAR-registered warehousing and kitting —
+  so teams avoid shortages and production delays with full traceability. Its developer surface
+  exposes two REST APIs: the Knowledge Graph (Component Cloud) API for searching parts, offers,
+  pricing, and specs, and the Platform API for BOMs, purchase orders, kits, invoices, and
+  inventory, plus outbound webhooks and integrations with NetSuite, SAP, Arena, Altium 365,
+  QuickBooks, and more.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.sanity.io/images/fdrwu6gi/production/4ecf7716c98de655cbae16fedb06c8142e446975-600x592.jpg?w=1200&fm=webp
 url: https://raw.githubusercontent.com/api-evangelist/cofactr/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,16 +30,136 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
 - Physical Ai
-apis: []
+- Component Intelligence
+- Electronics
+- Supply Chain
+- Procurement
+- Manufacturing
+- Hardware
+- Bill Of Materials
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- name: Cofactr Platform API
+  description: >-
+    REST API for the Cofactr platform: BOMs, purchase orders, kits, invoices, and inventory, scoped per
+    organization via org_id, with outbound webhooks for created/updated events.
+  humanURL: https://support.cofactr.com/articles/4081898446-cofactr-platform-api-documentation
+  baseURL: https://flagship-api.cofactr.com
+  tags:
+  - Procurement
+  - Bill Of Materials
+  - Inventory
+  properties:
+  - type: Documentation
+    url: https://developers.cofactr.com/
+  - type: Webhooks
+    url: asyncapi/cofactr-platform-webhooks.yml
+- aid: cofactr:cofactr-batch-api
+  name: Cofactr batch API
+  description: >-
+    Execute multiple product queries in a single request. Each batch member is an operation against the
+    products API expressed as a relative URL; members are fulfilled concurrently and returned in order.
+  humanURL: >-
+    https://support.cofactr.com/articles/7816454452-cofactr-component-cloud-api-documentation
+  baseURL: https://graph.cofactr.com
+  tags:
+  - batch
+  properties:
+  - type: OpenAPI
+    url: openapi/cofactr-batch-api-openapi.yml
+  - type: APIReference
+    url: https://graph.cofactr.com/openapi.json
+- aid: cofactr:cofactr-products-api
+  name: Cofactr products API
+  description: >-
+    Search, view, and autocomplete electronic component products. Every product is a unique combination
+    of manufacturer (`mfr`) and manufacturer part number (`mpn`), identified by a Cofactr ID (CPID). Product
+    responses are shaped by the requested `schema` and can include specs, documents, compliance data,
+    and market offers.
+  humanURL: >-
+    https://support.cofactr.com/articles/7816454452-cofactr-component-cloud-api-documentation
+  baseURL: https://graph.cofactr.com
+  tags:
+  - products
+  properties:
+  - type: OpenAPI
+    url: openapi/cofactr-products-api-openapi.yml
+  - type: APIReference
+    url: https://graph.cofactr.com/openapi.json
 common:
 - type: Website
   url: https://www.cofactr.com/
+- type: DeveloperPortal
+  url: https://developers.cofactr.com/
+- type: Documentation
+  url: https://support.cofactr.com/collections/5590442793-developer_resources
+- type: APIReference
+  url: https://graph.cofactr.com/openapi.json
+- type: GettingStarted
+  url: https://support.cofactr.com/articles/8047618750-developer-center
+- type: Support
+  url: https://support.cofactr.com/
+- type: SignUp
+  url: https://platform.cofactr.com/
+- type: TermsOfService
+  url: https://www.cofactr.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.cofactr.com/privacy-policy
+- type: GitHubOrganization
+  url: https://github.com/Cofactr
+- type: Authentication
+  url: authentication/cofactr-authentication.yml
+- type: OpenAPI
+  url: openapi/cofactr-knowledge-graph-openapi-original.json
+- type: Overlay
+  url: overlays/cofactr-knowledge-graph-overlay.yaml
+- type: Packages
+  url: packages/cofactr-packages.yml
+- type: SDKs
+  url: packages/cofactr-packages.yml
+- type: Webhooks
+  url: asyncapi/cofactr-platform-webhooks.yml
+- type: MCPServer
+  url: mcp/cofactr-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/cofactr-llms.txt
+- type: ErrorCatalog
+  url: errors/cofactr-problem-types.yml
+- type: Conventions
+  url: conventions/cofactr-conventions.yml
+- type: Lifecycle
+  url: lifecycle/cofactr-lifecycle.yml
+- type: RateLimits
+  url: rate-limits/cofactr-rate-limits.yml
+- type: Conformance
+  url: conformance/cofactr-conformance.yml
+- type: DataModel
+  url: data-model/cofactr-data-model.yml
+- type: Sandbox
+  url: sandbox/cofactr-sandbox.yml
+- type: Arazzo
+  name: Cofactr — search and view a component
+  url: arazzo/cofactr-search-and-view-product.yml
+- type: AgenticAccess
+  url: agentic-access/cofactr-agentic-access.yml
+- type: DomainSecurity
+  url: security/cofactr-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/cofactr-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.cofactr.com/cofactrs-bug-bounty
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

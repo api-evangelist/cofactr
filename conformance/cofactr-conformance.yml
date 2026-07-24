@@ -1,0 +1,30 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/cofactr-knowledge-graph-openapi-original.json
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: Knowledge Graph API publishes an OpenAPI 3.1.0 document at graph.cofactr.com/openapi.json.
+- id: apikey-auth
+  conforms: true
+  evidence: securitySchemes define two apiKey header schemes (X-API-KEY, X-CLIENT-ID).
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme is declared.
+- id: oidc
+  conforms: false
+- id: saml-sso
+  conforms: true
+  evidence: Platform supports SAML SSO (support KB article "Configuring SAML SSO").
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a plain {detail} JSON envelope (application/json), not application/problem+json.
+- id: cursor-pagination
+  conforms: true
+  evidence: List endpoints use limit + base64 page_token cursor pagination.
+- id: rfc8594-sunset
+  conforms: false
+  evidence: No Sunset/Deprecation header policy documented.
+- id: itar
+  conforms: true
+  evidence: Cofactr operates ITAR-registered warehousing and kitting (company disclosure).

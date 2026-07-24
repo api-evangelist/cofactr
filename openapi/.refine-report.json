@@ -1,0 +1,16 @@
+{
+  "provider": "cofactr",
+  "sources": [
+    "cofactr-batch-api-openapi.yml",
+    "cofactr-products-api-openapi.yml"
+  ],
+  "outputs": [
+    "cofactr-batch-api-openapi.yml",
+    "cofactr-products-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

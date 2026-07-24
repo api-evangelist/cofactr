@@ -1,0 +1,14 @@
+generated: '2026-07-18'
+method: searched
+source: https://pypi.org/pypi/cofactr/json
+packages:
+- language: python
+  registry: pypi
+  name: cofactr
+  version: 5.38.1
+  url: https://pypi.org/project/cofactr/
+  repository: https://github.com/Cofactr/cofactr-client
+  install: pip install cofactr
+  requires_python: '>=3.10,<4.0'
+  description: Client library for accessing Cofactr data (Knowledge Graph / Component Cloud API).
+  official: true
