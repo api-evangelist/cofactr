@@ -118,7 +118,7 @@ common:
 - type: Authentication
   url: authentication/cofactr-authentication.yml
 - type: OpenAPI
-  url: openapi/cofactr-knowledge-graph-openapi-original.json
+  url: openapi/_original/cofactr-knowledge-graph-openapi-original.json
 - type: Overlay
   url: overlays/cofactr-knowledge-graph-overlay.yaml
 - type: Packages
