@@ -1,0 +1,1862 @@
+{
+  "item": [
+    {
+      "id": "fa2dd44a-5498-45d5-9cfc-98edba4866d2",
+      "name": "products",
+      "description": {
+        "content": "Search, view, and autocomplete electronic component products. Every product is a unique combination of manufacturer (`mfr`) and manufacturer part number (`mpn`), identified by a Cofactr ID (CPID). Product responses are shaped by the requested `schema` and can include specs, documents, compliance data, and market offers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2af80f38-e5ad-4951-b103-99eb81c7fdc9",
+          "name": "List products",
+          "request": {
+            "name": "List products",
+            "description": {
+              "content": "List products.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "external",
+                  "value": "<boolean>",
+                  "description": "Whether to fetch external data."
+                },
+                {
+                  "disabled": false,
+                  "key": "force_refresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force re-ingestion from external sources. Overrides `external`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Base64 encoded page token used for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "filtering",
+                  "value": "<string>",
+                  "description": "Filters to apply for the search."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy."
+                },
+                {
+                  "disabled": false,
+                  "key": "stale_delta",
+                  "value": "<string,null>",
+                  "description": "How long until offer data is considered stale: a duration string (e.g. \"15m\", \"2h\", \"1d\") or \"inf\" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_strategy",
+                  "value": "default",
+                  "description": "Search strategy for interpreting `q`:\n- `default`: general search across MPN, alt MPNs, SKU, manufacturer, classification, and description, with partial/autocomplete matching; results sorted by inventory descending.\n- `mpn_exact`: `q` must exactly match one of the product's MPNs (including alternates).\n- `mpn_exact_multi`: `q` is querystring-encoded (`mpn=A&mpn=B`, repeatable); matches products whose MPN exactly matches any of the given values.\n- `mpn_exact_mfr`: `q` is querystring-encoded (`mpn=...&mfr=...`, repeatable); exact MPN match, optionally constrained to the given manufacturer(s).\n- `mpn_sku_mfr`: tailored for BOM matching where `q` is an MPN optionally followed by a manufacturer; scores MPN/alt-MPN/SKU/manufacturer matches and sorts by inventory descending.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "schema",
+                  "value": "<string>",
+                  "description": "(Required) Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cfacfe4-3166-4e40-9d4f-e95f6fa784bb",
+              "name": "Products matching the search query or filters, shaped by the requested `schema` (example shows `product-v1`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "search_strategy",
+                      "value": "default"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"CC2DKKO1LUCF\",\n      \"classification\": \"ceramic capacitors\",\n      \"description\": \"0805 0.1 uF 100V ±10% Tolerance X7R SMT Multilayer Ceramic Capacitor\",\n      \"hero_image\": \"https://assets.cofactr.com/image/772e5cab-cbf3-337d-99ff-c8ac79448a0c.jpg\",\n      \"mfr\": \"Murata\",\n      \"mpn\": \"GCM21BR72A104KA37L\",\n      \"alt_mpns\": [\n        \"GCM21BR72A104KA37L.\",\n        \"GCM21BR72A104KA37L\"\n      ],\n      \"msl\": \"1\",\n      \"package\": 805,\n      \"termination_type\": \"SMT\",\n      \"lifecycle_status\": \"Production\",\n      \"inventory_level\": 31089253,\n      \"buyable\": 31,\n      \"quotable\": 35,\n      \"maybe\": 0,\n      \"updated_at\": \"2026-07-09T22:21:55.650630+00:00\",\n      \"deprecated_ids\": [\n        \"XXLL0JPD4W2X\",\n        \"CC96NA4H7MOT\",\n        \"CCI0BFAAL00D\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13dc93a9-6939-47f7-be2e-61ee38f6fa3c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "search_strategy",
+                      "value": "default"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6512c53d-57f9-4429-b7de-838b8e4af55b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "search_strategy",
+                      "value": "default"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdaff7e4-2ab5-48cb-9b3e-a2c39028a66f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "search_strategy",
+                      "value": "default"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f11c1587-89d8-4788-b24c-372caeae99f1",
+              "name": "Rate limit exceeded. This may be the monthly product quota or the concurrent-request ceiling.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "search_strategy",
+                      "value": "default"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "13"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "13"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Reset",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-ResetTime",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f487773c-a271-44cd-87c7-fc5cd61b37c7",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "search_strategy",
+                      "value": "default"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae4be438-a4ec-40c3-8114-d5675bd92ef9",
+              "name": "Request exceeded the maximum processing time (concurrency-limited clients).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filtering",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "search_strategy",
+                      "value": "default"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "766355ca-2eea-4b12-8c54-67d3fa79cd7c",
+          "name": "View product",
+          "request": {
+            "name": "View product",
+            "description": {
+              "content": "View product.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "stale_delta",
+                  "value": "<string,null>",
+                  "description": "How long until offer data is considered stale: a duration string (e.g. \"15m\", \"2h\", \"1d\") or \"inf\" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "external",
+                  "value": "<boolean>",
+                  "description": "Whether to fetch external data."
+                },
+                {
+                  "disabled": false,
+                  "key": "force_refresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force re-ingestion from external sources. Overrides `external`."
+                },
+                {
+                  "disabled": false,
+                  "key": "schema",
+                  "value": "<string>",
+                  "description": "(Required) Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a2a72aa-388a-4da5-bcb4-fa4455a16249",
+              "name": "The requested product, shaped by the requested `schema` (example shows `product-offers-v1`).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"CC2DKKO1LUCF\",\n    \"classification\": \"ceramic capacitors\",\n    \"description\": \"0805 0.1 uF 100V ±10% Tolerance X7R SMT Multilayer Ceramic Capacitor\",\n    \"documents\": [\n      {\n        \"label\": \"Datasheet\",\n        \"url\": \"https://www.mouser.com/datasheet/2/281/1/GCM21BR72A104KA37_01A-3145807.pdf\",\n        \"filename\": \"Untitled\"\n      },\n      {\n        \"label\": \"Reach Statement\",\n        \"url\": \"http://sigma.octopart.com/reach_statement/Murata-company-16.pdf\",\n        \"filename\": \"Murata-company-16.pdf\"\n      }\n    ],\n    \"hero_image\": \"https://assets.cofactr.com/image/772e5cab-cbf3-337d-99ff-c8ac79448a0c.jpg\",\n    \"mfr\": \"Murata\",\n    \"mpn\": \"GCM21BR72A104KA37L\",\n    \"alt_mpns\": [\n      \"GCM21BR72A104KA37L.\",\n      \"GCM21BR72A104KA37L\"\n    ],\n    \"msl\": \"1\",\n    \"package\": 805,\n    \"specs\": [\n      {\n        \"id\": \"capacitance\",\n        \"label\": \"Capacitance\",\n        \"display_value\": \"100 nF\",\n        \"quantity\": {\n          \"unit\": \"F\",\n          \"amount\": 1e-7\n        }\n      },\n      {\n        \"id\": \"voltagerating_dc_\",\n        \"label\": \"Voltage rating (DC)\",\n        \"display_value\": \"100 V\",\n        \"quantity\": {\n          \"unit\": \"V\",\n          \"amount\": 100\n        }\n      },\n      {\n        \"id\": \"temperaturecoefficient\",\n        \"label\": \"Temperature coefficient\",\n        \"display_value\": \"X7R\"\n      }\n    ],\n    \"product_updated_at\": \"2026-07-09T22:21:55.650630+00:00\",\n    \"termination_type\": \"SMT\",\n    \"deprecated_ids\": [\n      \"XXLL0JPD4W2X\",\n      \"CC96NA4H7MOT\",\n      \"CCI0BFAAL00D\"\n    ],\n    \"min_lead\": 3,\n    \"offers\": [\n      {\n        \"part\": \"CC2DKKO1LUCF\",\n        \"seller\": {\n          \"id\": \"622fb450e4c292d8287b0af5\",\n          \"deprecated_ids\": [\n            \"62d4bcc6412443e55717f293\",\n            \"62d4bcc6412443e55717f291\",\n            \"62d4bcc6412443e55717f28f\"\n          ],\n          \"label\": \"Digi-Key\",\n          \"aliases\": [\n            \"Digi-Key Kit\",\n            \"Digi-Key Corporation\",\n            \"DIGI-KEY EVALUATION BOARDS\",\n            \"Digikey\",\n            \"Digi-Key Electronics\"\n          ],\n          \"certifications\": [\n            \"AS9120\",\n            \"CFR21\"\n          ],\n          \"lead\": 3,\n          \"free_ship\": {\n            \"threshold\": 250,\n            \"shipping_lead\": 2\n          },\n          \"shipping_options\": [\n            {\n              \"price\": 29.99,\n              \"shipping_lead\": 1\n            },\n            {\n              \"price\": 13.99,\n              \"shipping_lead\": 2\n            },\n            {\n              \"price\": 0,\n              \"shipping_lead\": 5\n            }\n          ],\n          \"convenience_return_window\": 30,\n          \"scheduled_release_period\": 12,\n          \"us_shipping_methods\": {\n            \"UPS 1 day\": 1,\n            \"UPS 2 day\": 2,\n            \"UPS 3 day\": 3,\n            \"UPS ground\": 5\n          },\n          \"international_shipping_methods\": {\n            \"DHL worldwide Express\": 3,\n            \"UPS worldwide saver\": 4\n          },\n          \"custom_reel_price\": 0\n        },\n        \"is_authorized\": true,\n        \"shipping_lead\": 4,\n        \"ships_from_country\": \"US\",\n        \"sku\": \"490-4789-2-ND\",\n        \"inventory_level\": 652178,\n        \"packaging\": \"Tape & Reel\",\n        \"moq\": 3000,\n        \"prices\": [\n          {\n            \"quantity\": 3000,\n            \"price\": 0.03828,\n            \"currency\": \"USD\",\n            \"converted_currency\": \"USD\",\n            \"converted_price\": 0.03828,\n            \"conversion_rate\": 1\n          },\n          {\n            \"quantity\": 6000,\n            \"price\": 0.0354,\n            \"currency\": \"USD\",\n            \"converted_currency\": \"USD\",\n            \"converted_price\": 0.0354,\n            \"conversion_rate\": 1\n          },\n          {\n            \"quantity\": 9000,\n            \"price\": 0.03395,\n            \"currency\": \"USD\",\n            \"converted_currency\": \"USD\",\n            \"converted_price\": 0.03395,\n            \"conversion_rate\": 1\n          }\n        ],\n        \"factory_lead_days\": 147,\n        \"order_multiple\": 1,\n        \"offer_updated_at\": \"2026-07-11T00:54:11.127659+00:00\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "344a39c0-a537-4fa0-bd57-7060ebde76c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e74cccfb-6683-4de7-8831-ef78be7db0fd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acb42814-e47a-460c-aca1-80b648c70535",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3345522f-d6bb-4042-87c8-f353b9c2d387",
+              "name": "Rate limit exceeded. This may be the monthly product quota or the concurrent-request ceiling.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "13"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "13"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Reset",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-ResetTime",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69881683-f88c-45bf-9226-5c122944d884",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0a13f2f-c1cc-48b8-8098-bc2b11309cd5",
+              "name": "Request exceeded the maximum processing time (concurrency-limited clients).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "stale_delta",
+                      "value": "<string,null>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "external",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "force_refresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "schema",
+                      "value": "product-v0"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9044f22b-5ff2-4a08-bda1-daf0bb9935bf",
+          "name": "List product autocompletions",
+          "request": {
+            "name": "List product autocompletions",
+            "description": {
+              "content": "List product autocompletions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products",
+                "autocompletions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of predictions that may be returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "993806b0-e9d4-4975-977b-76b1d43a0916",
+              "name": "Autocomplete predictions for the query, best match first.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "autocompletions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"CC2DKKO1LUCF\",\n      \"label\": \"Murata Electronics GCM21BR72A104KA37L\"\n    },\n    {\n      \"id\": \"CCEHW3JXS5CQ\",\n      \"label\": \"Murata Electronics GCM21BR71H104KA37L\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17f82753-2d75-4f88-9bff-11c343683252",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "autocompletions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ab11764-c68b-4fce-8d2d-f82a2033818b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "autocompletions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "719f04f0-cb0b-4e89-b0f8-2e04a701d651",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "autocompletions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7570ce7-c0eb-4fc7-aebf-196da243cde0",
+              "name": "Rate limit exceeded. This may be the monthly product quota or the concurrent-request ceiling.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "autocompletions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "13"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "13"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Reset",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-ResetTime",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3178e0a0-bfe8-4dbd-89ab-9306fc2baf21",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "autocompletions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dae8059-0705-4b4b-a7c1-a8b66dfa06a0",
+              "name": "Request exceeded the maximum processing time (concurrency-limited clients).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products",
+                    "autocompletions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.cofactr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9cd187a1-8d43-42d4-a8d2-491b3a16b9ae",
+    "name": "Cofactr Knowledge Graph batch products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Execute multiple product queries in a single request. Each batch member is an operation against the products API expressed as a relative URL; members are fulfilled concurrently and returned in order.",
+      "type": "text/plain"
+    }
+  }
+}

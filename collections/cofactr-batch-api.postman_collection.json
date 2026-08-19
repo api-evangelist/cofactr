@@ -1,0 +1,547 @@
+{
+  "item": [
+    {
+      "id": "e44b5bed-42f7-4615-bd44-cced577b4371",
+      "name": "batch",
+      "description": {
+        "content": "Execute multiple product queries in a single request. Each batch member is an operation against the products API expressed as a relative URL; members are fulfilled concurrently and returned in order.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1413e659-425b-4904-bdd0-660aad71422b",
+          "name": "Execute a batch of product queries",
+          "request": {
+            "name": "Execute a batch of product queries",
+            "description": {
+              "content": "Execute a batch of product queries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch",
+                "products",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"<string>\",\n      \"relative_url\": \"<string>\"\n    },\n    {\n      \"method\": \"<string>\",\n      \"relative_url\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e6b0db4-b6d0-4e2e-90a4-bb2c7cfb03e8",
+              "name": "One response per batch member, in request order. Each member carries the status code and body it would have received as a standalone request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr\"\n    },\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?filtering=[{\\\"field\\\":\\\"id\\\",\\\"operator\\\":\\\"IN\\\",\\\"value\\\":[\\\"CC2DKKO1LUCF\\\"]}]&schema=product-v1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"code\": 200,\n    \"body\": {\n      \"data\": [\n        {\n          \"id\": \"CC2DKKO1LUCF\",\n          \"classification\": \"ceramic capacitors\",\n          \"description\": \"0805 0.1 uF 100V ±10% Tolerance X7R SMT Multilayer Ceramic Capacitor\",\n          \"documents\": [\n            {\n              \"label\": \"Datasheet\",\n              \"url\": \"https://www.mouser.com/datasheet/2/281/1/GCM21BR72A104KA37_01A-3145807.pdf\",\n              \"filename\": \"Untitled\"\n            },\n            {\n              \"label\": \"Reach Statement\",\n              \"url\": \"http://sigma.octopart.com/reach_statement/Murata-company-16.pdf\",\n              \"filename\": \"Murata-company-16.pdf\"\n            }\n          ],\n          \"hero_image\": \"https://assets.cofactr.com/image/772e5cab-cbf3-337d-99ff-c8ac79448a0c.jpg\",\n          \"mfr\": \"Murata\",\n          \"mpn\": \"GCM21BR72A104KA37L\",\n          \"alt_mpns\": [\n            \"GCM21BR72A104KA37L.\",\n            \"GCM21BR72A104KA37L\"\n          ],\n          \"msl\": \"1\",\n          \"package\": 805,\n          \"specs\": [\n            {\n              \"id\": \"capacitance\",\n              \"label\": \"Capacitance\",\n              \"display_value\": \"100 nF\",\n              \"quantity\": {\n                \"unit\": \"F\",\n                \"amount\": 1e-7\n              }\n            },\n            {\n              \"id\": \"voltagerating_dc_\",\n              \"label\": \"Voltage rating (DC)\",\n              \"display_value\": \"100 V\",\n              \"quantity\": {\n                \"unit\": \"V\",\n                \"amount\": 100\n              }\n            },\n            {\n              \"id\": \"temperaturecoefficient\",\n              \"label\": \"Temperature coefficient\",\n              \"display_value\": \"X7R\"\n            }\n          ],\n          \"product_updated_at\": \"2026-07-09T22:21:55.650630+00:00\",\n          \"termination_type\": \"SMT\",\n          \"deprecated_ids\": [\n            \"XXLL0JPD4W2X\",\n            \"CC96NA4H7MOT\",\n            \"CCI0BFAAL00D\"\n          ],\n          \"min_lead\": 3,\n          \"offers\": [\n            {\n              \"part\": \"CC2DKKO1LUCF\",\n              \"seller\": {\n                \"id\": \"622fb450e4c292d8287b0af5\",\n                \"deprecated_ids\": [\n                  \"62d4bcc6412443e55717f293\",\n                  \"62d4bcc6412443e55717f291\",\n                  \"62d4bcc6412443e55717f28f\"\n                ],\n                \"label\": \"Digi-Key\",\n                \"aliases\": [\n                  \"Digi-Key Kit\",\n                  \"Digi-Key Corporation\",\n                  \"DIGI-KEY EVALUATION BOARDS\",\n                  \"Digikey\",\n                  \"Digi-Key Electronics\"\n                ],\n                \"certifications\": [\n                  \"AS9120\",\n                  \"CFR21\"\n                ],\n                \"lead\": 3,\n                \"free_ship\": {\n                  \"threshold\": 250,\n                  \"shipping_lead\": 2\n                },\n                \"shipping_options\": [\n                  {\n                    \"price\": 29.99,\n                    \"shipping_lead\": 1\n                  },\n                  {\n                    \"price\": 13.99,\n                    \"shipping_lead\": 2\n                  },\n                  {\n                    \"price\": 0,\n                    \"shipping_lead\": 5\n                  }\n                ],\n                \"convenience_return_window\": 30,\n                \"scheduled_release_period\": 12,\n                \"us_shipping_methods\": {\n                  \"UPS 1 day\": 1,\n                  \"UPS 2 day\": 2,\n                  \"UPS 3 day\": 3,\n                  \"UPS ground\": 5\n                },\n                \"international_shipping_methods\": {\n                  \"DHL worldwide Express\": 3,\n                  \"UPS worldwide saver\": 4\n                },\n                \"custom_reel_price\": 0\n              },\n              \"is_authorized\": true,\n              \"shipping_lead\": 4,\n              \"ships_from_country\": \"US\",\n              \"sku\": \"490-4789-2-ND\",\n              \"inventory_level\": 652178,\n              \"packaging\": \"Tape & Reel\",\n              \"moq\": 3000,\n              \"prices\": [\n                {\n                  \"quantity\": 3000,\n                  \"price\": 0.03828,\n                  \"currency\": \"USD\",\n                  \"converted_currency\": \"USD\",\n                  \"converted_price\": 0.03828,\n                  \"conversion_rate\": 1\n                },\n                {\n                  \"quantity\": 6000,\n                  \"price\": 0.0354,\n                  \"currency\": \"USD\",\n                  \"converted_currency\": \"USD\",\n                  \"converted_price\": 0.0354,\n                  \"conversion_rate\": 1\n                },\n                {\n                  \"quantity\": 9000,\n                  \"price\": 0.03395,\n                  \"currency\": \"USD\",\n                  \"converted_currency\": \"USD\",\n                  \"converted_price\": 0.03395,\n                  \"conversion_rate\": 1\n                }\n              ],\n              \"factory_lead_days\": 147,\n              \"order_multiple\": 1,\n              \"offer_updated_at\": \"2026-07-11T00:54:11.127659+00:00\"\n            }\n          ]\n        }\n      ]\n    }\n  },\n  {\n    \"code\": 200,\n    \"body\": {\n      \"data\": [\n        {\n          \"id\": \"CC2DKKO1LUCF\",\n          \"classification\": \"ceramic capacitors\",\n          \"description\": \"0805 0.1 uF 100V ±10% Tolerance X7R SMT Multilayer Ceramic Capacitor\",\n          \"hero_image\": \"https://assets.cofactr.com/image/772e5cab-cbf3-337d-99ff-c8ac79448a0c.jpg\",\n          \"mfr\": \"Murata\",\n          \"mpn\": \"GCM21BR72A104KA37L\",\n          \"alt_mpns\": [\n            \"GCM21BR72A104KA37L.\",\n            \"GCM21BR72A104KA37L\"\n          ],\n          \"msl\": \"1\",\n          \"package\": 805,\n          \"termination_type\": \"SMT\",\n          \"lifecycle_status\": \"Production\",\n          \"inventory_level\": 31089253,\n          \"buyable\": 31,\n          \"quotable\": 35,\n          \"maybe\": 0,\n          \"updated_at\": \"2026-07-09T22:21:55.650630+00:00\",\n          \"deprecated_ids\": [\n            \"XXLL0JPD4W2X\",\n            \"CC96NA4H7MOT\",\n            \"CCI0BFAAL00D\"\n          ]\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8460d5d6-d59c-4977-b6a5-f9af46a7953b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr\"\n    },\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?filtering=[{\\\"field\\\":\\\"id\\\",\\\"operator\\\":\\\"IN\\\",\\\"value\\\":[\\\"CC2DKKO1LUCF\\\"]}]&schema=product-v1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6da35732-da7d-4a8d-834f-39b39bf5557f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr\"\n    },\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?filtering=[{\\\"field\\\":\\\"id\\\",\\\"operator\\\":\\\"IN\\\",\\\"value\\\":[\\\"CC2DKKO1LUCF\\\"]}]&schema=product-v1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfa01911-0326-454f-b566-24e31995ad02",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr\"\n    },\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?filtering=[{\\\"field\\\":\\\"id\\\",\\\"operator\\\":\\\"IN\\\",\\\"value\\\":[\\\"CC2DKKO1LUCF\\\"]}]&schema=product-v1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f648bd4b-2a75-4fef-b5ba-00cc8c38b2a1",
+              "name": "Rate limit exceeded. This may be the monthly product quota or the concurrent-request ceiling.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr\"\n    },\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?filtering=[{\\\"field\\\":\\\"id\\\",\\\"operator\\\":\\\"IN\\\",\\\"value\\\":[\\\"CC2DKKO1LUCF\\\"]}]&schema=product-v1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9824"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9824"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-Reset",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Present only when the monthly product quota was exceeded.",
+                  "key": "X-RateLimit-ResetTime",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "559b97b7-cdc1-44a4-b1d6-12e850423465",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr\"\n    },\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?filtering=[{\\\"field\\\":\\\"id\\\",\\\"operator\\\":\\\"IN\\\",\\\"value\\\":[\\\"CC2DKKO1LUCF\\\"]}]&schema=product-v1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc5c35e1-f3f4-45e4-a93b-997417632205",
+              "name": "Request exceeded the maximum processing time (concurrency-limited clients).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch",
+                    "products",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeout",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"batch\": [\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr\"\n    },\n    {\n      \"method\": \"GET\",\n      \"relative_url\": \"?filtering=[{\\\"field\\\":\\\"id\\\",\\\"operator\\\":\\\"IN\\\",\\\"value\\\":[\\\"CC2DKKO1LUCF\\\"]}]&schema=product-v1\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds until the request may be retried. Always present on 429/504.",
+                  "key": "Retry-After",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.cofactr.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fda9389a-aad4-4236-9f16-d671ffdc2f8b",
+    "name": "Cofactr Knowledge Graph batch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Execute multiple product queries in a single request. Each batch member is an operation against the products API expressed as a relative URL; members are fulfilled concurrently and returned in order.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Cofactr Knowledge Graph batch products API",
+    "version": "2026-07-10"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.cofactr.com/products/",
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return."
+              },
+              {
+                "name": "external",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to fetch external data."
+              },
+              {
+                "name": "force_refresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force re-ingestion from external sources. Overrides `external`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Base64 encoded page token used for pagination."
+              },
+              {
+                "name": "filtering",
+                "value": "[{\"field\":\"id\",\"operator\":\"IN\",\"value\":[\"CC2DKKO1LUCF\"]}]",
+                "type": "query",
+                "description": "Filters to apply for the search."
+              },
+              {
+                "name": "q",
+                "value": "GCM21BR72A104KA37L",
+                "type": "query",
+                "description": "Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy."
+              },
+              {
+                "name": "stale_delta",
+                "value": "",
+                "type": "query",
+                "description": "How long until offer data is considered stale: a duration string (e.g. \"15m\", \"2h\", \"1d\") or \"inf\" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`)."
+              },
+              {
+                "name": "search_strategy",
+                "value": "",
+                "type": "query",
+                "description": "Search strategy for interpreting `q`:\n- `default`: general search across MPN, alt MPNs, SKU, manufacturer, classification, and description, with partial/autocomplete matching; results sorted by inventory descending.\n- `mpn_exact`: `q` must exactly match one of the product's MPNs (including alternates).\n- `mpn_exact_multi`: `q` is querystring-encoded (`mpn=A&mpn=B`, repeatable); matches products whose MPN exactly matches any of the given values.\n- `mpn_exact_mfr`: `q` is querystring-encoded (`mpn=...&mfr=...`, repeatable); exact MPN match, optionally constrained to the given manufacturer(s).\n- `mpn_sku_mfr`: tailored for BOM matching where `q` is an MPN optionally followed by a manufacturer; scores MPN/alt-MPN/SKU/manufacturer matches and sorts by inventory descending.\n"
+              },
+              {
+                "name": "schema",
+                "value": "product-v1",
+                "type": "query",
+                "description": "Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team."
+              }
+            ]
+          },
+          "docs": "List products."
+        },
+        {
+          "info": {
+            "name": "View product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.cofactr.com/products/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "stale_delta",
+                "value": "",
+                "type": "query",
+                "description": "How long until offer data is considered stale: a duration string (e.g. \"15m\", \"2h\", \"1d\") or \"inf\" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`)."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return."
+              },
+              {
+                "name": "external",
+                "value": "true",
+                "type": "query",
+                "description": "Whether to fetch external data."
+              },
+              {
+                "name": "force_refresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force re-ingestion from external sources. Overrides `external`."
+              },
+              {
+                "name": "schema",
+                "value": "product-v1",
+                "type": "query",
+                "description": "Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team."
+              }
+            ]
+          },
+          "docs": "View product."
+        },
+        {
+          "info": {
+            "name": "List product autocompletions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.cofactr.com/products/autocompletions/",
+            "params": [
+              {
+                "name": "q",
+                "value": "GCM21BR72A104KA37L",
+                "type": "query",
+                "description": "Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of predictions that may be returned."
+              }
+            ]
+          },
+          "docs": "List product autocompletions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
