@@ -33,6 +33,16 @@ created: '2026-07-17'
 modified: '2026-07-18'
 tags:
 - Company
+- Physical AI
+- Component Intelligence
+- Electronics
+- Supply Chain
+- Procurement
+- Manufacturing
+- Hardware
+- Bill of Materials
+tags_raw:
+- Company
 - Physical Ai
 - Component Intelligence
 - Electronics
@@ -55,6 +65,10 @@ apis:
   baseURL: https://flagship-api.cofactr.com
   tags:
   - Procurement
+  - Bill of Materials
+  - Inventory
+  tags_raw:
+  - Procurement
   - Bill Of Materials
   - Inventory
   properties:
@@ -71,6 +85,8 @@ apis:
     https://support.cofactr.com/articles/7816454452-cofactr-component-cloud-api-documentation
   baseURL: https://graph.cofactr.com
   tags:
+  - Batch
+  tags_raw:
   - batch
   properties:
   - type: OpenAPI
@@ -88,6 +104,8 @@ apis:
     https://support.cofactr.com/articles/7816454452-cofactr-component-cloud-api-documentation
   baseURL: https://graph.cofactr.com
   tags:
+  - Product
+  tags_raw:
   - products
   properties:
   - type: OpenAPI
