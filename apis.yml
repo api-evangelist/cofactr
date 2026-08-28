@@ -8,6 +8,18 @@ description: >-
   pricing, and specs, and the Platform API for BOMs, purchase orders, kits, invoices, and
   inventory, plus outbound webhooks and integrations with NetSuite, SAP, Arena, Altium 365,
   QuickBooks, and more.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
