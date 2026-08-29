@@ -4,8 +4,8 @@ info:
   version: 1.0.0
   summary: Search the Cofactr Knowledge Graph for a part, then view its full detail.
 sourceDescriptions:
-- name: knowledgeGraph
-  url: ../openapi/cofactr-knowledge-graph-openapi-original.json
+- name: productsApi
+  url: ../openapi/cofactr-products-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: searchAndViewProduct
