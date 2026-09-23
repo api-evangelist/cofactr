@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Cofactr Knowledge Graph batch products API
+  title: Cofactr Knowledge Graph Products API
   version: '2026-07-10'
   x-logo:
     url: /static/cofactr_logo.png
-  description: Execute multiple product queries in a single request. Each batch member is an operation against the products API expressed as a relative URL; members are fulfilled concurrently and returned in order.
+  description: Search, view, and autocomplete electronic component products. Every product is a unique combination of manufacturer (`mfr`) and manufacturer part number (`mpn`), identified by a Cofactr ID (CPID). Product responses are shaped by the requested `schema` and can include specs, documents, compliance data, and market offers.
 servers:
 - url: https://graph.cofactr.com
   description: Production
@@ -12,13 +12,13 @@ security:
 - ApiKey: []
   ClientId: []
 tags:
-- name: products
+- name: Products
   description: Search, view, and autocomplete electronic component products. Every product is a unique combination of manufacturer (`mfr`) and manufacturer part number (`mpn`), identified by a Cofactr ID (CPID). Product responses are shaped by the requested `schema` and can include specs, documents, compliance data, and market offers.
 paths:
   /products/:
     get:
       tags:
-      - products
+      - Products
       summary: List products
       description: List products.
       operationId: listProducts
@@ -137,7 +137,7 @@ paths:
   /products/{id}:
     get:
       tags:
-      - products
+      - Products
       summary: View product
       description: View product.
       operationId: getProduct
@@ -186,7 +186,7 @@ paths:
                     display_value: 100 nF
                     quantity:
                       unit: F
-                      amount: 1e-07
+                      amount: 1.0e-07
                   - id: voltagerating_dc_
                     label: Voltage rating (DC)
                     display_value: 100 V
@@ -337,7 +337,7 @@ paths:
   /products/autocompletions/:
     get:
       tags:
-      - products
+      - Products
       summary: List product autocompletions
       description: List product autocompletions.
       operationId: autocompleteProducts
@@ -433,317 +433,6 @@ paths:
                 type: string
 components:
   schemas:
-    ProductOffersV1Spec:
-      title: ProductOffersV1Spec
-      description: Product specification for product-offers-v1.
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-        display_value:
-          type: string
-        quantity:
-          anyOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/ProductOffersV1Quantity'
-          default: null
-      required:
-      - id
-      - label
-      - display_value
-    ProductViewResponse:
-      type: object
-      description: 'The shape of `data` is selected by the required `schema` query parameter: `product-v0` → ProductV0, `product-v1` → ProductV1, `product-offers-v0` → ProductOffersV0, `product-offers-v1` → ProductOffersV1.'
-      required:
-      - data
-      properties:
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ProductV0'
-          - $ref: '#/components/schemas/ProductV1'
-          - $ref: '#/components/schemas/ProductOffersV0'
-          - $ref: '#/components/schemas/ProductOffersV1'
-    ProductSpec:
-      title: ProductSpec
-      description: Class name is part of the public OpenAPI contract. Do not rename casually.
-      type: object
-      properties:
-        id:
-          type: string
-        label:
-          type: string
-        value:
-          type: string
-      required:
-      - id
-      - label
-      - value
-    ProductOffersV1Seller:
-      title: ProductOffersV1Seller
-      description: Seller fields exposed by product-offers-v1.
-      type: object
-      properties:
-        id:
-          type: string
-        deprecated_ids:
-          type: array
-          items:
-            type: string
-          default: []
-        label:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        aliases:
-          type: array
-          items:
-            type: string
-          default: []
-        certifications:
-          type: array
-          items:
-            type: string
-          default: []
-        lead:
-          type: integer
-        free_ship:
-          $ref: '#/components/schemas/FreeShipTerms'
-        shipping_options:
-          type: array
-          items:
-            type: object
-        best_case_lead:
-          anyOf:
-          - type: integer
-          - type: 'null'
-        convenience_return_window:
-          anyOf:
-          - type: integer
-          - type: 'null'
-        scheduled_release_period:
-          anyOf:
-          - type: integer
-          - type: 'null'
-        us_shipping_methods:
-          type: object
-          additionalProperties:
-            type: integer
-        international_shipping_methods:
-          type: object
-          additionalProperties:
-            type: integer
-        custom_reel_price:
-          anyOf:
-          - type: number
-          - type: 'null'
-      required:
-      - id
-      - lead
-      - shipping_options
-      - best_case_lead
-      - convenience_return_window
-      - scheduled_release_period
-      - us_shipping_methods
-      - international_shipping_methods
-      - custom_reel_price
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    OffersV0:
-      title: OffersV0
-      description: Offers v0 schema.
-      type: object
-      properties:
-        part:
-          type: string
-        seller:
-          $ref: '#/components/schemas/Seller'
-        is_authorized:
-          type: boolean
-          default: false
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        shipping_lead:
-          type: integer
-        ships_from_country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        sku:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        inventory_level:
-          type: integer
-          default: 0
-        packaging:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        moq:
-          type: integer
-          default: 1
-        prices:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricePoint'
-          default: []
-        updated_at:
-          type: string
-        factory_lead_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        on_order_quantity:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        factory_pack_quantity:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        order_multiple:
-          type: integer
-          default: 1
-        multipack_quantity:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        is_foreign:
-          type: boolean
-          default: false
-      required:
-      - part
-      - seller
-      - shipping_lead
-      - updated_at
-    ProductOffersV1:
-      title: ProductOffersV1
-      description: Product details with offers for new public API integrations.
-      type: object
-      properties:
-        id:
-          type: string
-        classification:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductDocument'
-          default: []
-        hero_image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        mfr:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        mpn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        alt_mpns:
-          type: array
-          items:
-            type: string
-          default: []
-        msl:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        package:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        specs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductOffersV1Spec'
-          default: []
-        terminations:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        product_updated_at:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        termination_type:
-          type: string
-          default: other
-        deprecated_ids:
-          type: array
-          items:
-            type: string
-          default: []
-        min_lead:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductOffersV1Offer'
-          default: []
-      required:
-      - id
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Error:
       type: object
       required:
@@ -752,6 +441,25 @@ components:
         detail:
           type: string
           description: Human-readable explanation of the error.
+    AutocompletionsResponse:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Autocompletion'
+    SearchStrategy:
+      type: string
+      enum:
+      - default
+      - mpn_exact_mfr
+      - mpn_exact
+      - mpn_exact_multi
+      - mpn_sku_mfr
+      title: SearchStrategy
+      description: Search strategy.
     ProductOffersV1Quantity:
       title: ProductOffersV1Quantity
       description: Structured quantity for product-offers-v1 specs.
@@ -778,81 +486,6 @@ components:
           - type: 'null'
           default: null
       required: []
-    ProductOffersV1Offer:
-      title: ProductOffersV1Offer
-      description: Supplier offer for product-offers-v1.
-      type: object
-      properties:
-        part:
-          type: string
-        seller:
-          $ref: '#/components/schemas/ProductOffersV1Seller'
-        is_authorized:
-          type: boolean
-          default: false
-        shipping_lead:
-          type: integer
-        ships_from_country:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        sku:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        inventory_level:
-          type: integer
-          default: 0
-        packaging:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        moq:
-          type: integer
-          default: 1
-        prices:
-          type: array
-          items:
-            $ref: '#/components/schemas/PricePoint'
-          default: []
-        offer_updated_at:
-          type: string
-        factory_lead_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        factory_pack_quantity:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        order_multiple:
-          type: integer
-          default: 1
-      required:
-      - part
-      - seller
-      - shipping_lead
-      - offer_updated_at
-    ProductDocument:
-      title: ProductDocument
-      description: Class name is part of the public OpenAPI contract. Do not rename casually.
-      type: object
-      properties:
-        label:
-          type: string
-        url:
-          type: string
-        filename:
-          type: string
-      required:
-      - label
-      - url
-      - filename
     PricePoint:
       title: PricePoint
       description: "Price in a specific currency + quantity.\n    Based on https://octopart.com/api/v4/reference#pricepoint\n\n    Class name is part of the public OpenAPI contract. Do not rename casually."
@@ -889,16 +522,151 @@ components:
       - converted_currency
       - converted_price
       - conversion_rate
-    SearchStrategy:
-      type: string
-      enum:
-      - default
-      - mpn_exact_mfr
-      - mpn_exact
-      - mpn_exact_multi
-      - mpn_sku_mfr
-      title: SearchStrategy
-      description: Search strategy.
+    ProductOffersV1Spec:
+      title: ProductOffersV1Spec
+      description: Product specification for product-offers-v1.
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        display_value:
+          type: string
+        quantity:
+          anyOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/ProductOffersV1Quantity'
+          default: null
+      required:
+      - id
+      - label
+      - display_value
+    Autocompletion:
+      type: object
+      required:
+      - id
+      - label
+      properties:
+        id:
+          type: string
+          description: Cofactr product ID (CPID).
+        label:
+          type: string
+          description: 'Display label: manufacturer + MPN.'
+    ProductSpec:
+      title: ProductSpec
+      description: Class name is part of the public OpenAPI contract. Do not rename casually.
+      type: object
+      properties:
+        id:
+          type: string
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - id
+      - label
+      - value
+    ProductV0:
+      title: ProductV0
+      description: Basic product information model for external API responses.
+      type: object
+      properties:
+        id:
+          type: string
+        classification:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        hero_image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        mfr:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        mpn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        alt_mpns:
+          type: array
+          items:
+            type: string
+          default: []
+        msl:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        package:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        terminations:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        termination_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        lifecycle_status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        inventory_level:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        buyable:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        quotable:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        maybe:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        updated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+      required:
+      - id
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ProductOffersV0:
       title: ProductOffersV0
       type: object
@@ -1015,15 +783,158 @@ components:
           default: []
       required:
       - id
-    AutocompletionsResponse:
+    ProductListResponse:
       type: object
+      description: 'The shape of `data` is selected by the required `schema` query parameter: `product-v0` → ProductV0, `product-v1` → ProductV1, `product-offers-v0` → ProductOffersV0, `product-offers-v1` → ProductOffersV1.'
       required:
       - data
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Autocompletion'
+            anyOf:
+            - $ref: '#/components/schemas/ProductV0'
+            - $ref: '#/components/schemas/ProductV1'
+            - $ref: '#/components/schemas/ProductOffersV0'
+            - $ref: '#/components/schemas/ProductOffersV1'
+    OffersV0:
+      title: OffersV0
+      description: Offers v0 schema.
+      type: object
+      properties:
+        part:
+          type: string
+        seller:
+          $ref: '#/components/schemas/Seller'
+        is_authorized:
+          type: boolean
+          default: false
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        shipping_lead:
+          type: integer
+        ships_from_country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        sku:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        inventory_level:
+          type: integer
+          default: 0
+        packaging:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        moq:
+          type: integer
+          default: 1
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricePoint'
+          default: []
+        updated_at:
+          type: string
+        factory_lead_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        on_order_quantity:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        factory_pack_quantity:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        order_multiple:
+          type: integer
+          default: 1
+        multipack_quantity:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        is_foreign:
+          type: boolean
+          default: false
+      required:
+      - part
+      - seller
+      - shipping_lead
+      - updated_at
+    ProductOffersV1Offer:
+      title: ProductOffersV1Offer
+      description: Supplier offer for product-offers-v1.
+      type: object
+      properties:
+        part:
+          type: string
+        seller:
+          $ref: '#/components/schemas/ProductOffersV1Seller'
+        is_authorized:
+          type: boolean
+          default: false
+        shipping_lead:
+          type: integer
+        ships_from_country:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        sku:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        inventory_level:
+          type: integer
+          default: 0
+        packaging:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        moq:
+          type: integer
+          default: 1
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricePoint'
+          default: []
+        offer_updated_at:
+          type: string
+        factory_lead_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        factory_pack_quantity:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+        order_multiple:
+          type: integer
+          default: 1
+      required:
+      - part
+      - seller
+      - shipping_lead
+      - offer_updated_at
     ProductV1:
       title: ProductV1
       description: Basic product information model for external API responses.
@@ -1118,22 +1029,21 @@ components:
           default: []
       required:
       - id
-    FreeShipTerms:
-      title: FreeShipTerms
+    ProductDocument:
+      title: ProductDocument
       description: Class name is part of the public OpenAPI contract. Do not rename casually.
       type: object
       properties:
-        threshold:
-          anyOf:
-          - type: number
-          - type: 'null'
-          default: null
-        shipping_lead:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-      required: []
+        label:
+          type: string
+        url:
+          type: string
+        filename:
+          type: string
+      required:
+      - label
+      - url
+      - filename
     Seller:
       title: Seller
       description: Class name is part of the public OpenAPI contract. Do not rename casually.
@@ -1231,21 +1141,30 @@ components:
       - us_shipping_methods
       - international_shipping_methods
       - custom_reel_price
-    Autocompletion:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - id
-      - label
-      properties:
-        id:
-          type: string
-          description: Cofactr product ID (CPID).
-        label:
-          type: string
-          description: 'Display label: manufacturer + MPN.'
-    ProductV0:
-      title: ProductV0
-      description: Basic product information model for external API responses.
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ProductOffersV1:
+      title: ProductOffersV1
+      description: Product details with offers for new public API integrations.
       type: object
       properties:
         id:
@@ -1260,6 +1179,11 @@ components:
           - type: string
           - type: 'null'
           default: null
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDocument'
+          default: []
         hero_image:
           anyOf:
           - type: string
@@ -1290,63 +1214,189 @@ components:
           - type: string
           - type: 'null'
           default: null
+        specs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOffersV1Spec'
+          default: []
         terminations:
           anyOf:
           - type: integer
           - type: 'null'
           default: null
+        product_updated_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
         termination_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        lifecycle_status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
-        inventory_level:
+          type: string
+          default: other
+        deprecated_ids:
+          type: array
+          items:
+            type: string
+          default: []
+        min_lead:
           anyOf:
           - type: integer
           - type: 'null'
           default: null
-        buyable:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        quotable:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        maybe:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          default: null
-        updated_at:
-          anyOf:
-          - type: string
-          - type: 'null'
-          default: null
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOffersV1Offer'
+          default: []
       required:
       - id
-    ProductListResponse:
+    ProductViewResponse:
       type: object
       description: 'The shape of `data` is selected by the required `schema` query parameter: `product-v0` → ProductV0, `product-v1` → ProductV1, `product-offers-v0` → ProductOffersV0, `product-offers-v1` → ProductOffersV1.'
       required:
       - data
       properties:
         data:
+          anyOf:
+          - $ref: '#/components/schemas/ProductV0'
+          - $ref: '#/components/schemas/ProductV1'
+          - $ref: '#/components/schemas/ProductOffersV0'
+          - $ref: '#/components/schemas/ProductOffersV1'
+    FreeShipTerms:
+      title: FreeShipTerms
+      description: Class name is part of the public OpenAPI contract. Do not rename casually.
+      type: object
+      properties:
+        threshold:
+          anyOf:
+          - type: number
+          - type: 'null'
+          default: null
+        shipping_lead:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          default: null
+      required: []
+    ProductOffersV1Seller:
+      title: ProductOffersV1Seller
+      description: Seller fields exposed by product-offers-v1.
+      type: object
+      properties:
+        id:
+          type: string
+        deprecated_ids:
           type: array
           items:
-            anyOf:
-            - $ref: '#/components/schemas/ProductV0'
-            - $ref: '#/components/schemas/ProductV1'
-            - $ref: '#/components/schemas/ProductOffersV0'
-            - $ref: '#/components/schemas/ProductOffersV1'
+            type: string
+          default: []
+        label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          default: null
+        aliases:
+          type: array
+          items:
+            type: string
+          default: []
+        certifications:
+          type: array
+          items:
+            type: string
+          default: []
+        lead:
+          type: integer
+        free_ship:
+          $ref: '#/components/schemas/FreeShipTerms'
+        shipping_options:
+          type: array
+          items:
+            type: object
+        best_case_lead:
+          anyOf:
+          - type: integer
+          - type: 'null'
+        convenience_return_window:
+          anyOf:
+          - type: integer
+          - type: 'null'
+        scheduled_release_period:
+          anyOf:
+          - type: integer
+          - type: 'null'
+        us_shipping_methods:
+          type: object
+          additionalProperties:
+            type: integer
+        international_shipping_methods:
+          type: object
+          additionalProperties:
+            type: integer
+        custom_reel_price:
+          anyOf:
+          - type: number
+          - type: 'null'
+      required:
+      - id
+      - lead
+      - shipping_options
+      - best_case_lead
+      - convenience_return_window
+      - scheduled_release_period
+      - us_shipping_methods
+      - international_shipping_methods
+      - custom_reel_price
   parameters:
+    PageToken:
+      name: page_token
+      in: query
+      required: false
+      schema:
+        anyOf:
+        - type: string
+        - type: 'null'
+        description: Base64 encoded page token used for pagination.
+        title: Page Token
+      description: Base64 encoded page token used for pagination.
+    Schema:
+      name: schema
+      in: query
+      required: true
+      schema:
+        type: string
+        description: 'Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team.'
+        examples:
+        - product-v0
+        - product-v1
+        - product-offers-v0
+        - product-offers-v1
+        title: Schema
+      description: 'Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team.'
+      example: product-v1
+    ForceRefresh:
+      name: force_refresh
+      in: query
+      required: false
+      schema:
+        anyOf:
+        - type: boolean
+        - type: 'null'
+        description: Whether to force re-ingestion from external sources. Overrides `external`.
+        default: false
+        title: Force Refresh
+      description: Whether to force re-ingestion from external sources. Overrides `external`.
+    Q:
+      name: q
+      in: query
+      required: false
+      schema:
+        anyOf:
+        - type: string
+        - type: 'null'
+        description: Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy.
+        title: Q
+      description: Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy.
+      example: GCM21BR72A104KA37L
     SearchStrategy:
       name: search_strategy
       in: query
@@ -1391,27 +1441,6 @@ components:
         description: Comma-separated list of fields to return.
         title: Fields
       description: Comma-separated list of fields to return.
-    PageToken:
-      name: page_token
-      in: query
-      required: false
-      schema:
-        anyOf:
-        - type: string
-        - type: 'null'
-        description: Base64 encoded page token used for pagination.
-        title: Page Token
-      description: Base64 encoded page token used for pagination.
-    StaleDelta:
-      name: stale_delta
-      in: query
-      required: false
-      schema:
-        type:
-        - string
-        - 'null'
-        description: 'How long until offer data is considered stale: a duration string (e.g. "15m", "2h", "1d") or "inf" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`).'
-      description: 'How long until offer data is considered stale: a duration string (e.g. "15m", "2h", "1d") or "inf" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`).'
     Filtering:
       name: filtering
       in: query
@@ -1424,18 +1453,16 @@ components:
         title: Filtering
       description: Filters to apply for the search.
       example: '[{"field":"id","operator":"IN","value":["CC2DKKO1LUCF"]}]'
-    Q:
-      name: q
+    StaleDelta:
+      name: stale_delta
       in: query
       required: false
       schema:
-        anyOf:
-        - type: string
-        - type: 'null'
-        description: Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy.
-        title: Q
-      description: Search query. Its interpretation depends on `search_strategy`; that parameter documents the syntax for each strategy.
-      example: GCM21BR72A104KA37L
+        type:
+        - string
+        - 'null'
+        description: 'How long until offer data is considered stale: a duration string (e.g. "15m", "2h", "1d") or "inf" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`).'
+      description: 'How long until offer data is considered stale: a duration string (e.g. "15m", "2h", "1d") or "inf" to never treat cached offer data as stale. Server default: 3 days. Only consulted when a refresh is performed (`external=true` or `force_refresh=true`).'
     External:
       name: external
       in: query
@@ -1449,33 +1476,6 @@ components:
         title: External
       description: Whether to fetch external data.
       example: true
-    Schema:
-      name: schema
-      in: query
-      required: true
-      schema:
-        type: string
-        description: 'Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team.'
-        examples:
-        - product-v0
-        - product-v1
-        - product-offers-v0
-        - product-offers-v1
-        title: Schema
-      description: 'Response schema for the returned product(s). Public values: `product-v0`, `product-v1`, `product-offers-v0`, `product-offers-v1`. Prefer `product-offers-v1` for new integrations that need offers and structured spec quantities. Schemas are versioned, and older versions remain available. Additional bespoke schemas exist for specific customers by arrangement with the Cofactr team.'
-      example: product-v1
-    ForceRefresh:
-      name: force_refresh
-      in: query
-      required: false
-      schema:
-        anyOf:
-        - type: boolean
-        - type: 'null'
-        description: Whether to force re-ingestion from external sources. Overrides `external`.
-        default: false
-        title: Force Refresh
-      description: Whether to force re-ingestion from external sources. Overrides `external`.
   securitySchemes:
     ApiKey:
       type: apiKey
