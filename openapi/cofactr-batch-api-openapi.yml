@@ -248,34 +248,6 @@ components:
         detail:
           type: string
           description: Human-readable explanation of the error.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ProductsBatch:
-      properties:
-        batch:
-          items:
-            $ref: '#/components/schemas/APIOperation'
-          type: array
-          maxItems: 250
-          title: Batch
-      type: object
-      required:
-      - batch
-      title: ProductsBatch
-      description: Batch of product requests.
-      examples:
-      - batch:
-        - method: GET
-          relative_url: ?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr
-        - method: GET
-          relative_url: ?filtering=[{"field":"id","operator":"IN","value":["CC2DKKO1LUCF"]}]&schema=product-v1
     ValidationError:
       properties:
         loc:
@@ -297,21 +269,25 @@ components:
       - msg
       - type
       title: ValidationError
-    BatchMemberResult:
+    ProductsBatch:
+      properties:
+        batch:
+          items:
+            $ref: '#/components/schemas/APIOperation'
+          type: array
+          maxItems: 250
+          title: Batch
       type: object
       required:
-      - code
-      - body
-      properties:
-        code:
-          type: integer
-          description: HTTP status code the member request would have received as a standalone request.
-        body:
-          description: 'The JSON body the member request would have received as a standalone request: a product list envelope (`ProductListResponse`) on success, or a validation/error body on failure.'
-    ProductBatchResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/BatchMemberResult'
+      - batch
+      title: ProductsBatch
+      description: Batch of product requests.
+      examples:
+      - batch:
+        - method: GET
+          relative_url: ?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr
+        - method: GET
+          relative_url: ?filtering=[{"field":"id","operator":"IN","value":["CC2DKKO1LUCF"]}]&schema=product-v1
     APIOperation:
       properties:
         method:
@@ -327,6 +303,30 @@ components:
       - relative_url
       title: APIOperation
       description: API Operation for GET requests.
+    ProductBatchResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchMemberResult'
+    BatchMemberResult:
+      type: object
+      required:
+      - code
+      - body
+      properties:
+        code:
+          type: integer
+          description: HTTP status code the member request would have received as a standalone request.
+        body:
+          description: 'The JSON body the member request would have received as a standalone request: a product list envelope (`ProductListResponse`) on success, or a validation/error body on failure.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   parameters:
     Timeout:
       name: timeout

@@ -46,6 +46,9 @@ x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-18'
+x-docs-platform: redoc
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-24
 tags:
 - Company
 - Physical AI
@@ -92,7 +95,7 @@ apis:
   - type: Webhooks
     url: asyncapi/cofactr-platform-webhooks.yml
 - aid: cofactr:cofactr-batch-api
-  name: Cofactr batch API
+  name: Cofactr Batch API
   description: >-
     Execute multiple product queries in a single request. Each batch member is an operation against the
     products API expressed as a relative URL; members are fulfilled concurrently and returned in order.
@@ -109,7 +112,7 @@ apis:
   - type: APIReference
     url: https://graph.cofactr.com/openapi.json
 - aid: cofactr:cofactr-products-api
-  name: Cofactr products API
+  name: Cofactr Products API
   description: >-
     Search, view, and autocomplete electronic component products. Every product is a unique combination
     of manufacturer (`mfr`) and manufacturer part number (`mpn`), identified by a Cofactr ID (CPID). Product
