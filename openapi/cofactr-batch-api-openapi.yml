@@ -240,6 +240,53 @@ paths:
                 type: string
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - detail
+      properties:
+        detail:
+          type: string
+          description: Human-readable explanation of the error.
+    APIOperation:
+      properties:
+        method:
+          type: string
+          const: GET
+          title: Method
+        relative_url:
+          type: string
+          title: Relative Url
+      type: object
+      required:
+      - method
+      - relative_url
+      title: APIOperation
+      description: API Operation for GET requests.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BatchMemberResult:
+      type: object
+      required:
+      - code
+      - body
+      properties:
+        code:
+          type: integer
+          description: HTTP status code the member request would have received as a standalone request.
+        body:
+          description: 'The JSON body the member request would have received as a standalone request: a product list envelope (`ProductListResponse`) on success, or a validation/error body on failure.'
+    ProductBatchResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchMemberResult'
     ValidationError:
       properties:
         loc:
@@ -261,25 +308,6 @@ components:
       - msg
       - type
       title: ValidationError
-    Error:
-      type: object
-      required:
-      - detail
-      properties:
-        detail:
-          type: string
-          description: Human-readable explanation of the error.
-    BatchMemberResult:
-      type: object
-      required:
-      - code
-      - body
-      properties:
-        code:
-          type: integer
-          description: HTTP status code the member request would have received as a standalone request.
-        body:
-          description: 'The JSON body the member request would have received as a standalone request: a product list envelope (`ProductListResponse`) on success, or a validation/error body on failure.'
     ProductsBatch:
       properties:
         batch:
@@ -299,34 +327,6 @@ components:
           relative_url: ?q=GCM21BR72A104KA37L&schema=product-offers-v1&external=true&search_strategy=mpn_sku_mfr
         - method: GET
           relative_url: ?filtering=[{"field":"id","operator":"IN","value":["CC2DKKO1LUCF"]}]&schema=product-v1
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    APIOperation:
-      properties:
-        method:
-          type: string
-          const: GET
-          title: Method
-        relative_url:
-          type: string
-          title: Relative Url
-      type: object
-      required:
-      - method
-      - relative_url
-      title: APIOperation
-      description: API Operation for GET requests.
-    ProductBatchResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/BatchMemberResult'
   parameters:
     Timeout:
       name: timeout
