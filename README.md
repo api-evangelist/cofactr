@@ -64,6 +64,141 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Cofactr is a company surfaced as a portfolio company of bain-capital-ventures and added to the API Evangelist network as a stub for enrichment. Sector: physical-ai. This profile is a lead awaiting the enrichment pipeline.
+Cofactr provides electronics supply chain infrastructure for hardware manufacturers — component intelligence, procurement execution, and ITAR-registered warehousing and kitting — so teams avoid shortages and production delays with full traceability. Its developer surface exposes two REST APIs: the Knowledge Graph (Component Cloud) API for searching parts, offers, pricing, and specs, and the Platform API for BOMs, purchase orders, kits, invoices, and inventory, plus outbound webhooks and integrations with NetSuite, SAP, Arena, Altium 365, QuickBooks, and more.
 
-Backed by: bain-capital-ventures — https://www.cofactr.com/
+**Areas:** Company · Physical AI · Component Intelligence · Electronics · Supply Chain · Procurement · Manufacturing · Hardware · Bill of Materials
+
+## Cofactr on APIs.io
+
+Everything profiled for Cofactr is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cofactr/](https://apis.io/providers/cofactr/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Cofactr Platform API](https://apis.io/apis/cofactr/cofactr-platform-api/) — REST API for the Cofactr platform: BOMs, purchase orders, kits, invoices, and inventory, scoped per organization via org_id, with outbound webhooks for…
+- [Cofactr Batch API](https://apis.io/apis/cofactr/cofactr-batch-api/) — Execute multiple product queries in a single request. Each batch member is an operation against the products API expressed as a relative URL; members are…
+- [Cofactr Products API](https://apis.io/apis/cofactr/cofactr-products-api/) — Search, view, and autocomplete electronic component products. Every product is a unique combination of manufacturer (`mfr`) and manufacturer part number…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Arazzo workflows (1)
+
+Multi-step workflows that chain operations into a business task.
+
+- [Cofactr — search and view a component](https://apis.io/arazzos/cofactr/cofactr-search-and-view-product/)
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Cofactr Platform Webhooks](https://apis.io/asyncapis/cofactr/cofactr-platform-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [cofactr-knowledge-graph](https://apis.io/servers/cofactr/cofactr-knowledge-graph/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Cofactr Agentic Access](https://apis.io/agentic-access/cofactr/cofactr-agentic-access/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Cofactr Knowledge Graph batch API](https://apis.io/collections/cofactr/open-cofactr-batch-api/)
+- [Cofactr Knowledge Graph batch products API](https://apis.io/collections/cofactr/open-cofactr-products-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Cofactr Knowledge Graph Overlay](https://apis.io/overlays/cofactr/cofactr-knowledge-graph-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Cofactr Authentication](https://apis.io/security/cofactr/cofactr-authentication/)
+- [Cofactr Domain Security](https://apis.io/security/cofactr/cofactr-domain-security/)
+- [Cofactr Vulnerability Disclosure](https://apis.io/security/cofactr/cofactr-vulnerability-disclosure/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Cofactr Rate Limits](https://apis.io/rate-limits/cofactr/cofactr-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.cofactr.com/)
+- [Documentation](https://support.cofactr.com/collections/5590442793-developer_resources)
+- [Getting started](https://support.cofactr.com/articles/8047618750-developer-center)
+- [API reference](https://graph.cofactr.com/openapi.json)
+- [Sign up](https://platform.cofactr.com/)
+- [Support](https://support.cofactr.com/)
+- [Security](https://www.cofactr.com/cofactrs-bug-bounty)
+- [Terms of service](https://www.cofactr.com/terms-of-service)
+- [Privacy policy](https://www.cofactr.com/privacy-policy)
+- [GitHub](https://github.com/Cofactr)
+
+## API Evangelist rating
+
+**Kin Score 45.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 60.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 70.8 |
+| Access clarity | 21.1 |
+
+**Agent readiness 41.7** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | verified |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cofactr/](https://apis.io/providers/cofactr/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cofactr: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cofactr/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
